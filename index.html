@@ -48,23 +48,48 @@ header{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 8
 .sortb{font-size:13px;color:var(--accent);white-space:nowrap;padding:8px 4px}
 main{padding:10px 0 calc(40px + var(--safe-b))}
 .lst{background:var(--card);border-radius:16px;overflow:hidden}
-.row{display:flex;align-items:center;gap:10px;padding:9px 12px;border-bottom:1px solid var(--hair);min-height:62px}
+.row{display:grid;grid-template-columns:auto 1fr auto;column-gap:10px;align-items:center;padding:12px 12px 12px 10px;border-bottom:1px solid var(--hair)}
 .row:last-child{border-bottom:0}
-.no{flex:none;width:40px;text-align:right;font-size:17px;font-weight:800;color:var(--ink2);font-variant-numeric:tabular-nums}
-.zt{display:inline-block;font-size:11px;font-weight:700;color:#fff;background:var(--accent);border-radius:6px;padding:0 5px;margin-right:4px;vertical-align:1px}
-.fl{font-size:24px;line-height:1;width:28px;text-align:center;flex:none}
-.nm{flex:1;min-width:0}.nm b{display:block;font-size:17px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.nm small{display:block;color:var(--muted);font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.nm small em{font-style:normal;color:var(--ink2)}
-.grp{font-size:12.5px;color:var(--accent);font-weight:600;margin-left:6px}
-.pb{flex:none;min-width:96px;height:42px;border-radius:12px;font-weight:700;font-size:15px;border:2px solid var(--bad);color:var(--badd);background:transparent;transition:transform .08s}
+.row.isok{background:color-mix(in srgb,var(--ok) 7%,var(--card))}
+.lft{display:flex;flex-direction:column;align-items:center;gap:3px;align-self:start;min-width:40px}
+.no{font-size:16px;font-weight:800;color:var(--ink2);font-variant-numeric:tabular-nums;background:var(--fill);border-radius:9px;padding:2px 7px;min-width:36px;text-align:center}
+.zt{font-size:11px;font-weight:700;color:#fff;background:var(--accent);border-radius:6px;padding:0 5px}
+.fl{font-size:24px;line-height:1}
+.nm{min-width:0}
+.nm b{display:block;font-size:17.5px;line-height:1.25;overflow-wrap:anywhere}
+.ig{display:block;font-size:15px;color:var(--accent);margin-top:2px;overflow-wrap:anywhere}
+.meta{display:flex;flex-wrap:wrap;gap:4px 6px;margin-top:5px}
+.meta span{font-size:12.5px;color:var(--ink2);background:var(--fill);border-radius:7px;padding:1px 7px;white-space:nowrap}
+.meta span.due{color:var(--badd);font-weight:700}.meta span.tm{color:var(--okd)}
+.grp{display:inline-flex;align-items:center;gap:4px;margin-top:7px;font-size:13.5px;color:var(--accent);font-weight:700;border:1.5px solid var(--accent);border-radius:9px;padding:4px 10px}
+.pb{min-width:92px;height:46px;border-radius:13px;font-weight:700;font-size:15px;border:2px solid var(--bad);color:var(--badd);background:transparent;transition:transform .08s;align-self:center}
 .pb:active{transform:scale(.96)}
 .pb.ok{background:var(--ok);border-color:var(--ok);color:#fff}
-.pb.conf{background:var(--warn);border-color:var(--warn);color:#fff;font-size:13px}
+.pb.conf{background:var(--warn);border-color:var(--warn);color:#fff;font-size:13px;line-height:1.2}
 .pb.none{border-color:var(--muted);color:var(--muted)}
-.pend{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--warn);margin-left:6px;vertical-align:middle}
+.pend{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--warn);margin-left:6px;vertical-align:middle}
+@media (max-width:380px){.pb{min-width:80px;font-size:14px}.nm b{font-size:16.5px}}
+/* 復原列 */
+.undo{position:fixed;left:50%;bottom:calc(14px + var(--safe-b));transform:translateX(-50%);z-index:40;width:min(560px,calc(100vw - 24px));background:rgba(28,28,30,.94);color:#fff;border-radius:16px;padding:10px 10px 10px 16px;display:flex;align-items:center;gap:10px;box-shadow:0 8px 28px rgba(0,0,0,.25)}
+.undo span{flex:1;min-width:0;font-size:14.5px;overflow-wrap:anywhere}
+.undo button{flex:none;background:#fff;color:#1c1c1e;font-weight:800;border-radius:11px;padding:9px 14px;font-size:15px}
+.undob{font-size:14px;color:var(--accent);padding:6px 4px;white-space:nowrap}
+/* 整筆確認 */
+.mask{position:fixed;inset:0;background:rgba(0,0,0,.42);z-index:60;display:flex;align-items:flex-end;justify-content:center}
+.sheet{background:var(--bg);width:min(620px,100vw);max-height:88vh;border-radius:20px 20px 0 0;display:flex;flex-direction:column;padding-bottom:var(--safe-b)}
+@media (min-width:700px){.mask{align-items:center}.sheet{border-radius:20px}}
+.sh-h{padding:16px 16px 8px}.sh-h h3{margin:0;font-size:19px}.sh-h p{margin:4px 0 0;color:var(--muted);font-size:14px}
+.sh-l{overflow:auto;padding:0 12px}
+.sh-l label{display:grid;grid-template-columns:auto auto 1fr auto;gap:10px;align-items:center;background:var(--card);padding:11px 12px;border-bottom:1px solid var(--hair)}
+.sh-l label:first-child{border-radius:14px 14px 0 0}.sh-l label:last-child{border-radius:0 0 14px 14px;border-bottom:0}.sh-l label:only-child{border-radius:14px}
+.sh-l input{width:22px;height:22px;accent-color:var(--ok)}
+.sh-l b{display:block;font-size:16.5px;overflow-wrap:anywhere}.sh-l small{display:block;color:var(--accent);font-size:14px;overflow-wrap:anywhere}
+.sh-l .st2{font-size:13px;font-weight:700;white-space:nowrap}.st2.y{color:var(--okd)}.st2.n{color:var(--badd)}
+.sh-f{display:flex;gap:10px;padding:14px 12px 16px}
+.sh-f button{flex:1;height:52px;border-radius:14px;font-weight:800;font-size:16.5px}
+.sh-f .cx{background:var(--fill)}.sh-f .go{background:var(--ok);color:#fff;flex:2}.sh-f .go:disabled{opacity:.4}
 .empty{text-align:center;color:var(--muted);padding:50px 0}
-.toast{position:fixed;left:50%;bottom:calc(18px + var(--safe-b));transform:translateX(-50%);background:rgba(0,0,0,.82);color:#fff;padding:10px 16px;border-radius:14px;font-size:14px;z-index:50;max-width:calc(100vw - 32px);text-align:center}
+.toast{position:fixed;left:50%;bottom:calc(84px + var(--safe-b));transform:translateX(-50%);background:rgba(0,0,0,.82);color:#fff;padding:10px 16px;border-radius:14px;font-size:14px;z-index:50;max-width:calc(100vw - 32px);text-align:center}
 .demo{background:var(--warn);color:#fff;text-align:center;font-size:12.5px;padding:4px}
 /* 統計 */
 .card{background:var(--card);border-radius:16px;padding:12px 14px;margin-bottom:12px}
@@ -96,7 +121,7 @@ th{font-size:12px;color:var(--muted);font-weight:600}tr.tot td{font-weight:800;b
 </section>
 <section id="app" hidden>
   <header><div class="wrap">
-    <div class="hr"><h2 id="zTitle"></h2><span class="sync" id="sync"><i></i><span>已同步</span></span><button class="out" id="logout">登出</button></div>
+    <div class="hr"><h2 id="zTitle"></h2><span class="sync" id="sync"><i></i><span>已同步</span></span><button class="undob" id="undoB" hidden>↶ 上一步</button><button class="out" id="logout">登出</button></div>
     <div class="seg" id="tabs" hidden><button data-tab="stat">統計</button><button data-tab="list">名單</button></div>
     <div id="listTools">
       <div class="stats" id="stats"></div>
@@ -107,6 +132,8 @@ th{font-size:12px;color:var(--muted);font-weight:600}tr.tot td{font-weight:800;b
   </div></header>
   <main class="wrap" id="list"></main>
 </section>
+<div class="undo" id="undo" hidden><span id="undoT"></span><button id="undoGo">復原</button></div>
+<div class="mask" id="mask" hidden><div class="sheet" role="dialog" aria-modal="true"><div class="sh-h"><h3 id="shT"></h3><p id="shP"></p></div><div class="sh-l" id="shL"></div><div class="sh-f"><button class="cx" id="shX">取消</button><button class="go" id="shGo">確認</button></div></div></div>
 <div class="toast" id="toast" hidden></div>
 <script>
 'use strict';
@@ -124,7 +151,7 @@ const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;'
 const flag=c=>{c=String(c||'').toUpperCase();if(c==='UK')c='GB';return /^[A-Z]{2}$/.test(c)?String.fromCodePoint(...[...c].map(x=>127397+x.charCodeAt(0))):'🏳️'};
 const money=n=>'NT$'+Number(n||0).toLocaleString('en-US');
 const zname=id=>(ZONES.find(z=>z.id===id)||{}).name||'';
-let S={zone:null,pin:'',who:'',rows:[],v:0,f:LS.get('f','todo'),sort:LS.get('sort','n'),q:'',zf:0,tab:LS.get('tab','stat'),pend:{},conf:null,busy:false,off:false};
+let S={hist:[],zone:null,pin:'',who:'',rows:[],v:0,f:LS.get('f','todo'),sort:LS.get('sort','n'),q:'',zf:0,tab:LS.get('tab','stat'),pend:{},conf:null,busy:false,off:false};
 const isAdmin=()=>S.zone&&S.zone.id===0;
 function toast(t){const e=$('#toast');e.textContent=t;e.hidden=false;clearTimeout(toast.t);toast.t=setTimeout(()=>e.hidden=true,2200)}
 /* ===== 呼叫雲端 ===== */
@@ -143,8 +170,8 @@ $('#zones').onclick=e=>{const b=e.target.closest('[data-z]');if(!b)return;const 
 $('#pad').onclick=e=>{const b=e.target.closest('[data-k]');if(!b)return;const k=b.dataset.k;if(k==='⌫')pinBuf=pinBuf.slice(0,-1);else if(pinBuf.length<4)pinBuf+=k;renderPin();if(pinBuf.length===4)tryLogin(pinBuf)};
 async function tryLogin(pin){S.pin=pin;S.who=$('#who').value.trim();LS.set('who',S.who);$('#err').textContent='登入中…';
   try{const j=await call({op:'list'});LS.set('sess',{z:S.zone.id,p:pin,who:S.who});enter(j)}catch(e){$('#err').textContent=e.message;pinBuf='';renderPin()}}
-function enter(j){$('#login').hidden=true;$('#app').hidden=false;if(j)apply(j);else render();startPoll()}
-$('#logout').onclick=()=>{if(Object.keys(S.pend).length&&!confirm('還有 '+Object.keys(S.pend).length+' 筆沒上傳，確定登出？'))return;LS.del('sess');S.pend={};LS.del('pend');location.reload()};
+function enter(j){S.hist=LS.get('hist'+S.zone.id,[]);renderUndoB&&setTimeout(renderUndoB);$('#login').hidden=true;$('#app').hidden=false;if(j)apply(j);else render();startPoll()}
+$('#logout').onclick=()=>{if(Object.keys(S.pend).length&&!confirm('還有 '+Object.keys(S.pend).length+' 筆沒上傳，確定登出？'))return;LS.del('sess');S.pend={};LS.del('pend');LS.del('hist'+S.zone.id);location.reload()};
 /* ===== 資料 ===== */
 function apply(j){S.rows=j.rows||[];S.v=j.v||S.v;if(j.event)$('#evName').textContent=j.event;LS.set('cache'+S.zone.id,{rows:S.rows,v:S.v,at:Date.now()});render()}
 const payOf=r=>S.pend[r.no]||r.pay||'';
@@ -156,7 +183,7 @@ function visible(){const q=S.q.trim().toLowerCase();let a=S.rows.slice();
   if(S.f==='todo')a=a.filter(r=>!paid(r));else if(S.f==='done')a=a.filter(r=>paid(r));
   if(S.sort==='table')a.sort((x,y)=>((x.t==null?999:x.t)-(y.t==null?999:y.t))||x.z-y.z||x.n-y.n);else a.sort((x,y)=>x.z-y.z||x.n-y.n);
   return a}
-function render(){if(!S.zone)return;$('#zTitle').textContent=S.zone.name;const adm=isAdmin();
+function render(){if(!S.zone)return;$('#zTitle').textContent=S.zone.id===0?'管理者':S.zone.name;const adm=isAdmin();
   $('#tabs').hidden=!adm;document.querySelectorAll('#tabs button').forEach(b=>b.classList.toggle('on',b.dataset.tab===S.tab));
   const showList=!adm||S.tab==='list';$('#listTools').hidden=!showList;
   if(!showList){renderStats();renderSync();return}
@@ -166,9 +193,11 @@ function render(){if(!S.zone)return;$('#zTitle').textContent=S.zone.name;const a
   document.querySelectorAll('#seg button').forEach(b=>b.classList.toggle('on',b.dataset.f===S.f));
   $('#sortb').textContent=(S.sort==='table'?'依桌號':'依編號')+' ▾';
   const a=visible();const regUn={};S.rows.forEach(r=>{if(r.reg&&!paid(r))regUn[r.reg]=(regUn[r.reg]||0)+1});
-  $('#list').innerHTML=a.length?'<div class="lst">'+a.map(r=>{const p=payOf(r),c=S.conf===r.no;const cls=c?'conf':p==='已收款'?'ok':p==='未收款'?'':'none';const lbl=c?'改回未收款？':p==='已收款'?'✓ 已收款':p||'未設定';
-      const g=(r.reg&&regUn[r.reg]>1&&p!=='已收款')?'<button class="grp" data-all="'+esc(r.reg)+'">整筆 '+regUn[r.reg]+' 人</button>':'';
-      return '<div class="row"><span class="no">'+(adm?'<span class="zt">'+r.z+'</span>':'')+r.n+'</span><span class="fl">'+flag(r.c)+'</span><div class="nm"><b>'+esc(r.name)+(S.pend[r.no]?'<span class="pend" title="還沒上傳"></span>':'')+'</b><small>'+(r.ig?'<em>'+esc(r.ig)+'</em> · ':'')+esc(CN[r.c]||r.c)+' · '+esc(r.reg)+' '+esc(r.role||'')+(r.t!=null?' · '+r.t+' 桌':' · 待排')+(Number(r.due)?' · 應付 '+money(r.due):'')+(p==='已收款'&&r.at?' · '+esc(r.at):'')+'</small></div>'+g+'<button class="pb '+cls+'" data-no="'+esc(r.no)+'">'+lbl+'</button></div>'}).join('')+'</div>'
+  const regAll={};S.rows.forEach(r=>{if(r.reg)regAll[r.reg]=(regAll[r.reg]||0)+1});
+  $('#list').innerHTML=a.length?'<div class="lst">'+a.map(r=>{const p=payOf(r),c=S.conf===r.no;const cls=c?'conf':p==='已收款'?'ok':p==='未收款'?'':'none';const lbl=c?'再點一次<br>改回未收款':p==='已收款'?'✓ 已收款':p||'未設定';
+      const g=(r.reg&&regAll[r.reg]>1&&regUn[r.reg])?'<button class="grp" data-all="'+esc(r.reg)+'">整筆 '+regAll[r.reg]+' 人'+(regUn[r.reg]<regAll[r.reg]?'（未收 '+regUn[r.reg]+'）':'')+' ›</button>':'';
+      const meta=[esc(CN[r.c]||r.c),esc(r.reg)+(r.role?' '+esc(r.role):''),r.t!=null?'第 '+r.t+' 桌':'待排'].map(x=>'<span>'+x+'</span>').join('')+(Number(r.due)?'<span class="due">應付 '+money(r.due)+'</span>':'')+(r.paym?'<span>'+esc(r.paym)+'</span>':'')+(p==='已收款'&&r.at?'<span class="tm">✓ '+esc(r.at)+'</span>':'');
+      return '<div class="row'+(p==='已收款'?' isok':'')+'"><div class="lft"><span class="no">'+r.n+'</span>'+(adm?'<span class="zt">'+r.z+' 區</span>':'')+'<span class="fl">'+flag(r.c)+'</span></div><div class="nm"><b>'+esc(r.name)+(S.pend[r.no]?'<span class="pend" title="還沒上傳"></span>':'')+'</b>'+(r.ig?'<span class="ig">'+esc(r.ig)+'</span>':'')+'<div class="meta">'+meta+'</div>'+g+'</div><button class="pb '+cls+'" data-no="'+esc(r.no)+'">'+lbl+'</button></div>'}).join('')+'</div>'
     :'<div class="empty">'+(S.q?'找不到「'+esc(S.q)+'」':S.f==='todo'?'這裡都收完了 🎉':'沒有資料')+'</div>';
   renderSync()}
 /* ===== 管理者統計 ===== */
@@ -190,10 +219,36 @@ function renderStats(){const R=S.rows,P=R.filter(paid),U=R.filter(r=>!paid(r));
   $('#list').innerHTML=big+zt+mt+ct+wt+ft}
 function renderSync(){const n=Object.keys(S.pend).length,e=$('#sync');e.className='sync'+(S.off?' off':n||S.busy?' busy':'');e.querySelector('span').textContent=S.off?('離線'+(n?'，'+n+' 筆待上傳':'')):n?n+' 筆上傳中':'已同步'}
 /* ===== 點選 ===== */
-function setPay(nos,pay){nos.forEach(no=>{const r=S.rows.find(x=>x.no===no);if(!r)return;if((r.pay||'')===pay)delete S.pend[no];else S.pend[no]=pay});LS.set('pend',{z:S.zone.id,p:S.pend});S.conf=null;render();try{navigator.vibrate&&navigator.vibrate(12)}catch(e){}flushSoon()}
+function setPay(nos,pay,label,noHist){const prev={};nos.forEach(no=>{const r=S.rows.find(x=>x.no===no);if(r)prev[no]=payOf(r)==='已收款'?'已收款':'未收款'});
+  const ch=nos.filter(no=>prev[no]&&prev[no]!==pay);if(!ch.length)return;
+  if(!noHist){S.hist.push({label:label||'',prev:Object.fromEntries(ch.map(n=>[n,prev[n]]))});if(S.hist.length>40)S.hist.shift();LS.set('hist'+S.zone.id,S.hist);showUndo(label)}
+  nos=ch;nos.forEach(no=>{const r=S.rows.find(x=>x.no===no);if(!r)return;if((r.pay||'')===pay)delete S.pend[no];else S.pend[no]=pay});LS.set('pend',{z:S.zone.id,p:S.pend});S.conf=null;render();try{navigator.vibrate&&navigator.vibrate(12)}catch(e){}flushSoon()}
+const nameOf=no=>{const r=S.rows.find(x=>x.no===no);return r?r.name:''};
 $('#list').addEventListener('click',e=>{const b=e.target.closest('.pb');if(b){const no=b.dataset.no,r=S.rows.find(x=>x.no===no),p=payOf(r);
-    if(p==='已收款'){if(S.conf===no){setPay([no],'未收款')}else{S.conf=no;render();clearTimeout(S.confT);S.confT=setTimeout(()=>{if(S.conf===no){S.conf=null;render()}},2500)}}else setPay([no],'已收款');return}
-  const a=e.target.closest('[data-all]');if(a){const k=a.dataset.all;const nos=S.rows.filter(r=>r.reg===k&&!paid(r)).map(r=>r.no);setPay(nos,'已收款');toast(k+' 整筆 '+nos.length+' 人已收款')}});
+    if(p==='已收款'){if(S.conf===no){setPay([no],'未收款',r.name+' 改回未收款')}else{S.conf=no;render();clearTimeout(S.confT);S.confT=setTimeout(()=>{if(S.conf===no){S.conf=null;render()}},3000)}}else setPay([no],'已收款',r.name+' 已收款');return}
+  const a=e.target.closest('[data-all]');if(a)openGroup(a.dataset.all)});
+/* 整筆：先列出整筆名單，確認後才送出 */
+function openGroup(reg){const mem=S.rows.filter(r=>r.reg===reg).sort((x,y)=>(x.role==='本人'?0:1)-(y.role==='本人'?0:1)||x.n-y.n);
+  const un=mem.filter(r=>!paid(r));
+  $('#shT').textContent=reg+' 整筆 '+mem.length+' 人';
+  const due=dueSum(mem);$('#shP').textContent='請核對名單，打勾的人會改成「已收款」'+(due?'。整筆應付 '+money(due):'');
+  $('#shL').innerHTML=mem.map(r=>{const ok=paid(r);return '<label><input type="checkbox" data-no="'+esc(r.no)+'"'+(ok?' disabled':' checked')+'><span class="fl">'+flag(r.c)+'</span><span><b>#'+r.n+' '+esc(r.name)+'</b>'+(r.ig?'<small>'+esc(r.ig)+'</small>':'')+'<small style="color:var(--muted)">'+esc(r.role||'')+(r.t!=null?' · 第 '+r.t+' 桌':' · 待排')+(Number(r.due)?' · 應付 '+money(r.due):'')+'</small></span><span class="st2 '+(ok?'y':'n')+'">'+(ok?'已收款':'未收款')+'</span></label>'}).join('');
+  S.grp=reg;updGroup();$('#mask').hidden=false;document.body.style.overflow='hidden'}
+function grpSel(){return [...document.querySelectorAll('#shL input:checked:not(:disabled)')].map(i=>i.dataset.no)}
+function updGroup(){const n=grpSel().length,g=$('#shGo');g.disabled=!n;g.textContent=n?'確認 '+n+' 人已收款':'請勾選'}
+function closeGroup(){$('#mask').hidden=true;document.body.style.overflow='';S.grp=null}
+$('#shL').addEventListener('change',updGroup);
+$('#shX').onclick=closeGroup;
+$('#mask').addEventListener('click',e=>{if(e.target.id==='mask')closeGroup()});
+$('#shGo').onclick=()=>{const nos=grpSel();if(!nos.length)return;const reg=S.grp;closeGroup();setPay(nos,'已收款',reg+' 整筆 '+nos.length+' 人已收款')};
+/* 復原 */
+function showUndo(label){$('#undoT').textContent='✓ '+label;$('#undo').hidden=false;clearTimeout(showUndo.t);showUndo.t=setTimeout(()=>$('#undo').hidden=true,7000);renderUndoB()}
+function renderUndoB(){const n=S.hist.length;$('#undoB').hidden=!n}
+function undo(){const h=S.hist.pop();if(!h){toast('沒有可以復原的操作');return}LS.set('hist'+S.zone.id,S.hist);$('#undo').hidden=true;
+  const byPay={};Object.entries(h.prev).forEach(([no,p])=>(byPay[p]=byPay[p]||[]).push(no));
+  Object.entries(byPay).forEach(([p,nos])=>setPay(nos,p,'',true));renderUndoB();toast('已復原：'+h.label)}
+$('#undoGo').onclick=undo;
+$('#undoB').onclick=()=>{const h=S.hist[S.hist.length-1];if(!h)return;if(confirm('復原上一步？\n\n'+h.label+'\n\n（會改回原本的狀態）'))undo()};
 $('#seg').onclick=e=>{const b=e.target.closest('[data-f]');if(!b)return;S.f=b.dataset.f;LS.set('f',S.f);render();scrollTo(0,0)};
 $('#zf').onclick=e=>{const b=e.target.closest('[data-zf]');if(!b)return;S.zf=+b.dataset.zf;render();scrollTo(0,0)};
 $('#tabs').onclick=e=>{const b=e.target.closest('[data-tab]');if(!b)return;S.tab=b.dataset.tab;LS.set('tab',S.tab);render();scrollTo(0,0)};
@@ -205,7 +260,7 @@ let flushT=null,backoff=1000;
 function flushSoon(ms){clearTimeout(flushT);flushT=setTimeout(flush,ms==null?300:ms)}
 async function flush(){const ops=Object.entries(S.pend).map(([no,pay])=>({no,pay}));if(!ops.length||S.busy)return;S.busy=true;renderSync();
   try{const j=await call({op:'set',ops});ops.forEach(o=>{if(S.pend[o.no]===o.pay)delete S.pend[o.no]});LS.set('pend',{z:S.zone.id,p:S.pend});S.off=false;backoff=1000;S.busy=false;apply(j);if(Object.keys(S.pend).length)flushSoon()}
-  catch(e){S.busy=false;if(e.server){toast(e.message);if(/密碼/.test(e.message)){LS.del('sess');setTimeout(()=>location.reload(),1500)}}S.off=!e.server;renderSync();backoff=Math.min(backoff*2,20000);flushSoon(backoff)}}
+  catch(e){S.busy=false;if(e.server&&!/其他人正在儲存/.test(e.message)){toast(e.message);if(/密碼/.test(e.message)){LS.del('sess');setTimeout(()=>location.reload(),1500)}}S.off=!e.server;if(/其他人正在儲存/.test(e.message))S.off=false;renderSync();backoff=Math.min(backoff*2,20000);flushSoon(backoff)}}
 let pollT=null;
 function startPoll(){clearInterval(pollT);pollT=setInterval(poll,POLL);setTimeout(poll,300)}
 async function poll(){if(S.busy||document.hidden)return;if(Object.keys(S.pend).length){flush();return}
@@ -216,7 +271,7 @@ addEventListener('beforeunload',e=>{if(Object.keys(S.pend).length){e.preventDefa
 /* ===== 示範資料 ===== */
 let DB=null;
 function demoApi(b){if(!DB){const names=['Alice Chen','Ben Wu','Cindy Lin','David Ho','Emma Sato','Frank Lee','Grace Kim','Henry Park','Ivy Tan','Jack Ng','王小明','林美玲','陳志豪','黃怡君','張家豪','李佳穎','吳俊傑','劉雅婷','蔡宗翰','楊淑芬'];DB=[];let n=1;const cs=['TW','JP','US','HK','KR'];
-    for(let z=1;z<=5;z++)for(let i=0;i<8;i++){const sz=1+(i%3);const reg='TP'+String(z*100+i).padStart(3,'0');const pd=i%3===0;for(let j=0;j<sz;j++){DB.push({z,no:'D'+(n++),name:names[(i*3+j+z)%names.length],ig:'@demo_'+z+i+j,c:cs[z-1],reg,role:j?'攜伴':'本人',party:String(sz),t:z*5+i,pay:pd?'已收款':'未收款',due:j?'':String(1200*sz),paym:pd?'線上付款':'現場付款',id:String(n),at:'',ts:0,by:''})}}
+    for(let z=1;z<=5;z++)for(let i=0;i<8;i++){const sz=1+(i%3);const reg='TP'+String(z*100+i).padStart(3,'0');const pd=i%3===0;for(let j=0;j<sz;j++){DB.push({z,no:'D'+(n++),name:i===2&&j===0?'Christopher Alexander Montgomery-Wellington':names[(i*3+j+z)%names.length],ig:i===1?'@a_very_long_instagram_handle_'+z+j+'_official':'@demo_'+z+i+j,c:cs[z-1],reg,role:j?'攜伴':'本人',party:String(sz),t:z*5+i,pay:pd?'已收款':'未收款',due:j?'':String(1200*sz),paym:pd?'線上付款':'現場付款',id:String(n),at:'',ts:0,by:''})}}
     for(let z=1;z<=5;z++){const a=DB.filter(r=>r.z===z).sort((x,y)=>{const k=s=>[/^[a-z0-9]/i.test(s)?0:1,s.toLowerCase()];const p=k(x.name),q=k(y.name);return p[0]-q[0]||(p[1]<q[1]?-1:p[1]>q[1]?1:0)});a.forEach((r,i)=>r.n=i+1)}}
   return new Promise((ok,no)=>setTimeout(()=>{const want=b.z===0?'0714':String(b.z).repeat(4);if(String(b.p)!==want)return no(Object.assign(new Error('密碼不正確（示範：區號重複 4 次，管理者 0714）'),{server:true}));
     if(b.op==='set')b.ops.forEach(o=>{const r=DB.find(x=>x.no===o.no);if(r&&(b.z===0||r.z===b.z)){r.pay=o.pay;const d=new Date();r.at=String(d.getMonth()+1).padStart(2,'0')+'/'+String(d.getDate()).padStart(2,'0')+' '+d.toTimeString().slice(0,5);r.ts=d.getTime();r.by='收款（'+(b.z?zname(b.z):'管理者')+(b.who?'・'+b.who:'')+'）'}});

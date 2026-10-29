@@ -250,6 +250,16 @@ a.ig::after{content:"↗";font-size:11px;margin-left:3px;color:var(--ink3)}
 .hu{flex:none;height:32px;padding:0 14px;border-radius:999px;border:1px solid var(--line2);font-size:13.5px;font-weight:600}
 .hu:active{background:var(--soft)}
 @media (max-width:374px){.pb{width:86px}.tb{width:44px;height:44px}.lh .c-p{width:86px}.lh .c-t{width:44px}}
+
+/* 桌號：無框大數字＋上方小字 TABLE（儀表板風格） */
+.tb,.tb b{all:unset}
+.tb{flex:none;width:52px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;line-height:1;box-sizing:border-box}
+.tb::before{content:"TABLE";font:600 9px var(--sans);letter-spacing:.1em;color:var(--ink3)}
+.tb b{font:700 26px var(--mono);font-variant-numeric:tabular-nums;letter-spacing:-.05em;color:var(--ink)}
+.tb.na b{font:600 13px var(--sans);letter-spacing:0;color:var(--ink2)}
+.it .tb{width:44px}.it .tb b{font-size:20px}.it .tb::before{font-size:8px}
+.lh .c-t{width:52px}
+@media (max-width:374px){.tb{width:46px}.tb b{font-size:23px}.lh .c-t{width:46px}}
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -316,6 +326,7 @@ const LS={get(k,d){try{const v=localStorage.getItem('pay.'+k);return v==null?d:J
 const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const flag=c=>{c=String(c||'').toUpperCase();if(c==='UK')c='GB';return /^[A-Z]{2}$/.test(c)?String.fromCodePoint(...[...c].map(x=>127397+x.charCodeAt(0))):'🏳️'};
 const money=n=>'NT$'+Number(n||0).toLocaleString('en-US');
+const tHue=n=>{let h=((Number(n)||0)*137.508)%360*280/360;if(h>=95)h+=80;return Math.round(h)}; // 黃金角讓相鄰桌號顏色差最多；跳過綠色，避免跟「已收款」搞混
 const igUrl=h=>{const u=String(h||'').trim().replace(/^@+/,'').replace(/^https?:\/\/(www\.)?instagram\.com\//i,'').replace(/[/?#].*$/,'');return /^[A-Za-z0-9._]{1,30}$/.test(u)?'https://www.instagram.com/'+u+'/':''};
 
 /* ===== 中英文 ===== */

@@ -2,7 +2,7 @@
 <html lang="zh-Hant">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <meta name="theme-color" content="#ffffff">
 <meta name="robots" content="noindex,nofollow">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -213,44 +213,82 @@ td.g{color:var(--green)}td.r{color:var(--red)}
 .feed small{display:block;color:var(--ink2);font-size:12.5px;margin-top:2px}
 .feed .g{color:var(--green)}.feed .r{color:var(--red)}
 .muted{color:var(--ink2);font-size:14px;padding:14px 0}
+
+/* v6 */
+html{touch-action:manipulation;-webkit-text-size-adjust:100%}
+button,a,input,.row{touch-action:manipulation}
+.lgtop{display:flex;margin:-36px 0 28px}.lgtop .sp,.nav .sp{flex:1}
+.lang{display:inline-flex;background:var(--soft);border-radius:999px;padding:3px}
+.lang button{height:28px;padding:0 12px;border-radius:999px;font-size:13px;font-weight:600;color:var(--ink2)}
+.lang button.on{background:#fff;color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.08)}
+.lang.sm button{height:24px;padding:0 9px;font-size:12px}
+.who{font-size:16px}
+.lh{display:flex;align-items:center;gap:14px;padding:0 0 8px;font-size:11.5px;font-weight:600;color:var(--ink3);letter-spacing:.04em;text-transform:uppercase}
+.lh .c-no{width:34px;text-align:center}.lh .c-nm{flex:1}.lh .c-t{width:48px;text-align:center}.lh .c-p{width:96px;text-align:center}
+.no{width:34px;height:30px;flex:none;align-self:flex-start;display:flex;flex-direction:column;align-items:center;justify-content:center;font:700 15px var(--mono);color:var(--ink);background:var(--soft);border-radius:9px;padding:0;letter-spacing:-.03em}
+.no .zd{margin:0;position:absolute;width:6px;height:6px;border-radius:50%;background:var(--c);transform:translate(15px,-13px)}
+.no{position:relative}
+.tb{width:48px;height:48px;border:2px solid var(--ink);border-radius:13px}
+.tb b{font:700 21px var(--mono);letter-spacing:-.04em}
+.tb.na{border:1.5px dashed var(--ink3)}.tb.na b{font:600 12px var(--sans);color:var(--ink2)}
+.pb{width:96px}
+.pb.cfp{background:var(--green);border-color:var(--green);color:#fff;animation:pulse 1s ease-in-out infinite}
+.pb.cfp::before{display:none}
+.pb.cfu{background:var(--ink);border-color:var(--ink);color:#fff;font-size:13px}
+.pb.cfu::before{display:none}
+@keyframes pulse{50%{box-shadow:0 0 0 5px color-mix(in srgb,var(--green) 22%,transparent)}}
+.row.arm{background:linear-gradient(90deg,transparent,var(--greenS) 40%,var(--greenS))}
+a.ig{display:block;color:var(--ink2);text-decoration:none;width:max-content;max-width:100%}
+a.ig:hover,a.ig:active{color:var(--z1);text-decoration:underline}
+a.ig::after{content:"↗";font-size:11px;margin-left:3px;color:var(--ink3)}
+.histb{font-size:14px;font-weight:550;color:var(--ink);white-space:nowrap;height:40px;padding:0 2px}
+.it .ino{font:700 13px var(--mono);width:28px;text-align:center;color:var(--ink);background:var(--soft);border-radius:7px;padding:4px 0;flex:none}
+.it .tb{width:40px;height:40px;border-width:1.5px;border-radius:11px}.it .tb b{font-size:16px}
+.hi{display:flex;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid var(--line)}
+.hi time{font:500 12.5px var(--mono);color:var(--ink3);width:42px;flex:none}
+.hi .hl{flex:1;min-width:0;font-size:14.5px;overflow-wrap:anywhere}
+.hu{flex:none;height:32px;padding:0 14px;border-radius:999px;border:1px solid var(--line2);font-size:13.5px;font-weight:600}
+.hu:active{background:var(--soft)}
+@media (max-width:374px){.pb{width:86px}.tb{width:44px;height:44px}.lh .c-p{width:86px}.lh .c-t{width:44px}}
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
-<div id="demoBar" class="demo" hidden>示範模式 · 資料是假的，不會寫入雲端</div>
+<div id="demoBar" class="demo" hidden data-i="demo"></div>
 
 <section id="login">
   <div class="wrap">
-    <div class="lg-h"><small id="evName">晚宴</small><h1>現場收款</h1><p>選擇你負責的區域，輸入密碼開始收款。</p></div>
-    <div class="cap">選擇區域</div>
+    <div class="lgtop"><span class="sp"></span><div class="lang" id="lang1"><button data-lang="zh">中文</button><button data-lang="en">EN</button></div></div>
+    <div class="lg-h"><small id="evName">晚宴</small><h1 data-i="title"></h1><p data-i="intro"></p></div>
+    <div class="cap" data-i="pickZone"></div>
     <div class="group" id="zones"></div>
     <div class="group" id="admz"></div>
   </div>
 </section>
 
 <section id="pin" hidden>
-  <div class="pin-top"><button class="back" id="pinBack">‹ 返回</button></div>
-  <div class="pin-h"><div class="zi" id="pinIcon"></div><b id="pinTtl"></b><small>輸入 4 位數密碼</small></div>
+  <div class="pin-top"><button class="back" id="pinBack" data-i="back"></button></div>
+  <div class="pin-h"><div class="zi" id="pinIcon"></div><b id="pinTtl"></b><small data-i="pin4"></small></div>
   <div class="dots" id="dots"></div>
   <div class="err" id="err"></div>
   <div class="pad" id="pad"></div>
-  <input class="who" id="who" placeholder="你的名字（選填）" maxlength="20" autocomplete="off">
+  <input class="who" id="who" data-ph="who" maxlength="20" autocomplete="off">
 </section>
 
 <section id="app" hidden>
   <div class="top"><div class="wrap">
-    <div class="nav"><button class="nb" id="logout">‹ 登出</button><span class="sp"></span><span class="sync" id="sync"><i></i><span>已同步</span></span></div>
+    <div class="nav"><button class="nb" id="logout" data-i="logout"></button><span class="sp"></span><span class="sync" id="sync"><i></i><span></span></span><div class="lang sm" id="lang2"><button data-lang="zh">中</button><button data-lang="en">EN</button></div></div>
     <div class="title"><h1 id="zTitle"></h1></div>
-    <div class="seg" id="tabs" hidden><button data-tab="stat">統計</button><button data-tab="list">名單</button></div>
+    <div class="seg" id="tabs" hidden><button data-tab="stat" data-i="tabStat"></button><button data-tab="list" data-i="tabList"></button></div>
     <div class="sum" id="sum"></div>
   </div></div>
   <div class="bar" id="bar"><div class="wrap">
     <div class="srow">
-      <div class="q"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="7" cy="7" r="5.2"/><path d="m11 11 3.5 3.5"/></svg><input id="q" type="search" placeholder="編號、姓名、IG、桌號" autocomplete="off" enterkeyhint="search"><button id="qx" hidden aria-label="清除">✕</button></div>
+      <div class="q"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="7" cy="7" r="5.2"/><path d="m11 11 3.5 3.5"/></svg><input id="q" type="search" data-ph="search" autocomplete="off" enterkeyhint="search"><button id="qx" hidden aria-label="clear">✕</button></div>
       <button class="sortb" id="sortb"></button>
-      <button class="nb" id="undoB" hidden aria-label="復原上一步">復原</button>
+      <button class="histb" id="histB" hidden></button>
     </div>
     <div class="chips" id="zf" hidden></div>
     <div class="seg" id="seg"></div>
@@ -258,23 +296,19 @@ td.g{color:var(--green)}td.r{color:var(--red)}
   <main class="wrap" id="list"></main>
 </section>
 
-<div class="undo" id="undo" hidden><span id="undoT"></span><button id="undoGo">復原</button></div>
+<div class="undo" id="undo" hidden><span id="undoT"></span><button id="undoGo" data-i="undo"></button></div>
 <div class="mask" id="mask" hidden><div class="sheet" role="dialog" aria-modal="true">
   <div class="grab"></div>
-  <div class="sh-h"><h3 id="shT"></h3><p id="shP">請核對名單，勾選的人會改成「已收款」</p></div>
+  <div class="sh-h"><h3 id="shT"></h3><p id="shP"></p></div>
   <div class="sh-l" id="shL"></div>
   <div class="sh-t" id="shTot"></div>
-  <div class="sh-f"><button class="cx" id="shX">取消</button><button class="go" id="shGo">確認</button></div>
+  <div class="sh-f" id="shF"><button class="cx" id="shX" data-i="cancel"></button><button class="go" id="shGo"></button></div>
 </div></div>
 <div class="toast" id="toast" hidden></div>
 <script>
 'use strict';
 /* ===== 設定：Apps Script 部署網址（結尾是 /exec） ===== */
 const API='https://script.google.com/macros/s/AKfycby0rorBPBH4beK8wfPxJ-v-fUYVUQA-2RYGyCe0YXC3CG85Fn5ouzq4zLqdL49iXbcJ/exec';
-const ZONES=[{id:1,name:'台灣區'},{id:2,name:'日本區'},{id:3,name:'美洲與大洋洲區'},{id:4,name:'港星馬中（華語圈）'},{id:5,name:'韓國、歐洲與東南亞區'}];
-const ADMIN={id:0,name:'管理者（全部區域）'};
-const SHORT={1:'台灣',2:'日本',3:'美洲大洋洲',4:'港星馬中',5:'韓歐東南亞'};
-const CN={TW:'台灣',JP:'日本',KR:'韓國',HK:'香港',CN:'中國',US:'美國',AU:'澳洲',SG:'新加坡',MY:'馬來西亞',TH:'泰國',PH:'菲律賓',ID:'印尼',VN:'越南',MO:'澳門',GB:'英國',UK:'英國',CA:'加拿大',FR:'法國',DE:'德國',ES:'西班牙',NL:'荷蘭',BR:'巴西',MN:'蒙古',NZ:'紐西蘭',CL:'智利',MX:'墨西哥',IN:'印度',IT:'義大利'};
 const DEMO=/[?&]demo/.test(location.search);
 const POLL=8000; // 每 8 秒檢查別人有沒有改資料
 const $=s=>document.querySelector(s);
@@ -282,34 +316,87 @@ const LS={get(k,d){try{const v=localStorage.getItem('pay.'+k);return v==null?d:J
 const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const flag=c=>{c=String(c||'').toUpperCase();if(c==='UK')c='GB';return /^[A-Z]{2}$/.test(c)?String.fromCodePoint(...[...c].map(x=>127397+x.charCodeAt(0))):'🏳️'};
 const money=n=>'NT$'+Number(n||0).toLocaleString('en-US');
-const zname=id=>(ZONES.find(z=>z.id===id)||{}).name||'';
+const igUrl=h=>{const u=String(h||'').trim().replace(/^@+/,'').replace(/^https?:\/\/(www\.)?instagram\.com\//i,'').replace(/[/?#].*$/,'');return /^[A-Za-z0-9._]{1,30}$/.test(u)?'https://www.instagram.com/'+u+'/':''};
+
+/* ===== 中英文 ===== */
+let LANG=LS.get('lang','zh');
+const ZN={zh:{1:'台灣區',2:'日本區',3:'美洲與大洋洲區',4:'港星馬中（華語圈）',5:'韓國、歐洲與東南亞區',0:'管理者'},en:{1:'Taiwan',2:'Japan',3:'Americas & Oceania',4:'HK · SG · MY · CN',5:'Korea, Europe & SE Asia',0:'Admin'}};
+const ZS={zh:{1:'台灣',2:'日本',3:'美洲大洋洲',4:'港星馬中',5:'韓歐東南亞'},en:{1:'Taiwan',2:'Japan',3:'Americas',4:'HK/SG/MY/CN',5:'KR/EU/SEA'}};
+const CN={TW:'台灣',JP:'日本',KR:'韓國',HK:'香港',CN:'中國',US:'美國',AU:'澳洲',SG:'新加坡',MY:'馬來西亞',TH:'泰國',PH:'菲律賓',ID:'印尼',VN:'越南',MO:'澳門',GB:'英國',UK:'英國',CA:'加拿大',FR:'法國',DE:'德國',ES:'西班牙',NL:'荷蘭',BR:'巴西',MN:'蒙古',NZ:'紐西蘭',CL:'智利',MX:'墨西哥',IN:'印度',IT:'義大利'};
+let DN=null;try{DN=new Intl.DisplayNames(['en'],{type:'region'})}catch(e){}
+const cname=c=>{c=String(c||'').toUpperCase();if(LANG==='en'){try{return DN?DN.of(c==='UK'?'GB':c):c}catch(e){return c}}return CN[c]||c};
+const T={
+ zh:{demo:'示範模式 · 資料是假的，不會寫入雲端',title:'現場收款',intro:'選擇你負責的區域，輸入密碼開始收款。',pickZone:'選擇區域',back:'‹ 返回',pin4:'輸入 4 位數密碼',who:'你的名字（選填）',logout:'‹ 登出',
+  tabStat:'統計',tabList:'名單',search:'編號、姓名、IG、桌號',undo:'復原',cancel:'取消',del:'刪除',
+  synced:'已同步',uploading:'{n} 筆上傳中',offline:'離線',offlineN:'離線 · {n} 筆待上傳',loggingIn:'登入中…',
+  sortN:'依編號',sortT:'依桌號',hist:'紀錄',histN:'紀錄 {n}',
+  fTodo:'未收款',fDone:'已收款',fAll:'全部',all:'全部',
+  sum:'/ {n} 人已收款',colNo:'編號',colName:'姓名 · IG',colT:'桌號',colPay:'款項',
+  unpaid:'未收款',paid:'已收款',unset:'未設定',confirmPay:'確認收款',confirmUnpay:'改回未收？',
+  group:'整筆 {n} 人',tbd:'待排',
+  emptyQ:'找不到結果',emptyQ2:'沒有符合「{q}」的人',emptyTodo:'全部收完了',emptyTodo2:'這個篩選裡沒有未收款的人',emptyNone:'沒有資料',
+  grpTitle:'{reg} · 整筆 {n} 人',grpHint:'請核對名單，勾選的人會改成「已收款」',thisDue:'本次應收',grpGo:'確認 {n} 人已收款',grpPick:'請勾選要收款的人',
+  lPay:'{name} 已收款',lUnpay:'{name} 改回未收款',lGrp:'{reg} 整筆 {n} 人已收款',undone:'已復原 · {l}',noUndo:'沒有可以復原的操作',
+  histTitle:'我的操作紀錄',histHint:'每一筆都可以單獨復原（只會改回這支手機改過的人）',histEmpty:'還沒有操作',histDone:'已復原',histClose:'關閉',histChanged:'已被改過，略過 {n} 人',
+  logoutQ:'確定登出？',logoutPend:'還有 {n} 筆還沒上傳完成，確定登出？',
+  ovAll:'總覽 · {n} 人',kPaid:'已收款',kUnpaid:'未收款',kTotal:'總人數',kPaidAmt:'已收金額',kDueAmt:'待收金額',kAllAmt:'應收總額',
+  zones:'各區',zs:'{p}% · 未收 {u} 人 · 待收 {d}',pm:'付款方式',pmh:['方式','人數','已收','未收','待收金額'],noPm:'（未填）',ct:'國家／地區',cth:['國家','人數','已收','未收'],
+  coll:'收款人',collh:['區域・收款人','處理人數','收到金額'],recent:'最近更新',noRecent:'還沒有人在現場改過款項狀態',zoneN:'{z} 區'},
+ en:{demo:'Demo mode · sample data, nothing is saved',title:'Payment Check-in',intro:'Choose your zone and enter the passcode to start.',pickZone:'Zones',back:'‹ Back',pin4:'Enter 4-digit passcode',who:'Your name (optional)',logout:'‹ Log out',
+  tabStat:'Overview',tabList:'Guests',search:'No., name, IG, table',undo:'Undo',cancel:'Cancel',del:'Delete',
+  synced:'Synced',uploading:'Uploading {n}',offline:'Offline',offlineN:'Offline · {n} queued',loggingIn:'Signing in…',
+  sortN:'By No.',sortT:'By table',hist:'History',histN:'History {n}',
+  fTodo:'Unpaid',fDone:'Paid',fAll:'All',all:'All',
+  sum:'/ {n} paid',colNo:'No.',colName:'Name · IG',colT:'Table',colPay:'Payment',
+  unpaid:'Unpaid',paid:'Paid',unset:'Not set',confirmPay:'Confirm',confirmUnpay:'Mark unpaid?',
+  group:'Group of {n}',tbd:'TBD',
+  emptyQ:'No results',emptyQ2:'Nobody matches “{q}”',emptyTodo:'All collected',emptyTodo2:'No unpaid guests in this view',emptyNone:'No data',
+  grpTitle:'{reg} · {n} guests',grpHint:'Check the list. Ticked guests will be marked paid.',thisDue:'Amount due',grpGo:'Confirm {n} paid',grpPick:'Select guests',
+  lPay:'{name} marked paid',lUnpay:'{name} marked unpaid',lGrp:'{reg}: {n} guests marked paid',undone:'Undone · {l}',noUndo:'Nothing to undo',
+  histTitle:'My actions',histHint:'Undo any single action (only guests changed from this phone).',histEmpty:'No actions yet',histDone:'Undone',histClose:'Close',histChanged:'Changed since, skipped {n}',
+  logoutQ:'Log out?',logoutPend:'{n} changes are still uploading. Log out anyway?',
+  ovAll:'Overview · {n} guests',kPaid:'Paid',kUnpaid:'Unpaid',kTotal:'Guests',kPaidAmt:'Collected',kDueAmt:'Outstanding',kAllAmt:'Total due',
+  zones:'Zones',zs:'{p}% · {u} unpaid · {d} outstanding',pm:'Payment method',pmh:['Method','Guests','Paid','Unpaid','Outstanding'],noPm:'(blank)',ct:'Countries',cth:['Country','Guests','Paid','Unpaid'],
+  coll:'Collectors',collh:['Zone · collector','Guests','Collected'],recent:'Recent updates',noRecent:'No on-site changes yet',zoneN:'Zone {z}'}};
+const t=(k,o)=>{let s=(T[LANG]||T.zh)[k];if(s==null)s=T.zh[k]||k;if(o&&typeof s==='string')s=s.replace(/\{(\w+)\}/g,(m,x)=>o[x]!=null?o[x]:m);return s};
+const zname=id=>ZN[LANG][id]||'';
+const tErr=m=>{m=String(m||'');if(LANG!=='en')return m;if(/錯誤太多次/.test(m))return 'Too many wrong attempts. Try again in 10 minutes.';if(/密碼不正確/.test(m))return 'Incorrect passcode'+(/示範/.test(m)?' (demo: zone number ×4, admin 0714)':'');if(/連線失敗/.test(m))return 'Connection failed';if(/沒有這個區域/.test(m))return 'Unknown zone';return m};
+const payTxt=p=>p==='已收款'?t('paid'):p==='未收款'?t('unpaid'):p?p:t('unset');
+function applyLang(){document.documentElement.lang=LANG==='en'?'en':'zh-Hant';document.title=t('title');
+  document.querySelectorAll('[data-i]').forEach(e=>e.textContent=t(e.dataset.i));
+  document.querySelectorAll('[data-ph]').forEach(e=>e.placeholder=t(e.dataset.ph));
+  document.querySelectorAll('.lang button').forEach(b=>b.classList.toggle('on',b.dataset.lang===LANG));
+  renderZones();renderPinPad();if(S.zone&&!$('#pin').hidden)setPinTitle();if(S.zone&&!$('#app').hidden){render();renderHistB()}if(S.grp)openGroup(S.grp.reg,true);if(S.histOpen)openHist()}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-lang]');if(!b)return;LANG=b.dataset.lang;LS.set('lang',LANG);applyLang()});
+
 let S={hist:[],zone:null,pin:'',who:'',rows:[],v:0,f:LS.get('f','todo'),sort:LS.get('sort','n'),q:'',zf:0,tab:LS.get('tab','stat'),pend:{},conf:null,busy:false,off:false};
 const isAdmin=()=>S.zone&&S.zone.id===0;
-function toast(t){const e=$('#toast');e.textContent=t;e.hidden=false;clearTimeout(toast.t);toast.t=setTimeout(()=>e.hidden=true,2200)}
+function toast(m){const e=$('#toast');e.textContent=m;e.hidden=false;clearTimeout(toast.t);toast.t=setTimeout(()=>e.hidden=true,2400)}
 /* ===== 呼叫雲端 ===== */
 async function call(body){
   const payload=Object.assign({api:'pay',z:S.zone.id,p:S.pin,who:S.who},body);
   if(DEMO)return demoApi(payload);
   const r=await fetch(API,{method:'POST',credentials:'omit',cache:'no-store',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload)});
   if(!r.ok)throw new Error('連線失敗（'+r.status+'）');const j=await r.json();if(!j.ok)throw Object.assign(new Error(j.error||'失敗'),{server:true});return j}
+
 /* ===== 登入 ===== */
 function renderZones(){
-  $('#zones').innerHTML=ZONES.map(z=>'<button class="zb c'+z.id+'" data-z="'+z.id+'"><span class="zi">'+z.id+'</span><span class="zn">'+esc(z.name)+'</span></button>').join('');
-  $('#admz').innerHTML='<button class="zb c0" data-z="0"><span class="zi">★</span><span class="zn">管理者</span></button>'}
+  $('#zones').innerHTML=[1,2,3,4,5].map(id=>'<button class="zb c'+id+'" data-z="'+id+'"><span class="zi">'+id+'</span><span class="zn">'+esc(zname(id))+'</span></button>').join('');
+  $('#admz').innerHTML='<button class="zb c0" data-z="0"><span class="zi">★</span><span class="zn">'+esc(zname(0))+'</span></button>'}
 let pinBuf='';
 function renderPin(){$('#dots').innerHTML=[0,1,2,3].map(i=>'<i'+(i<pinBuf.length?' class="f"':'')+'></i>').join('')}
-$('#pad').innerHTML=['1','2','3','4','5','6','7','8','9','0','del'].map(k=>k==='del'?'<button class="del" data-k="del">刪除</button>':'<button data-k="'+k+'"'+(k==='0'?' class="k0"':'')+'>'+k+'</button>').join('');
-function openPin(id){S.zone=id===0?ADMIN:ZONES.find(z=>z.id===id);pinBuf='';renderPin();
-  $('#pinIcon').className='zi c'+id;$('#pinIcon').textContent=id===0?'★':id;$('#pinTtl').textContent=id===0?'管理者':S.zone.name;
+function renderPinPad(){$('#pad').innerHTML=['1','2','3','4','5','6','7','8','9','0','del'].map(k=>k==='del'?'<button class="del" data-k="del">'+t('del')+'</button>':'<button data-k="'+k+'"'+(k==='0'?' class="k0"':'')+'>'+k+'</button>').join('')}
+function setPinTitle(){const id=S.zone.id;$('#pinIcon').className='zi c'+id;$('#pinIcon').textContent=id===0?'★':id;$('#pinTtl').textContent=zname(id)}
+function openPin(id){S.zone={id};pinBuf='';renderPin();setPinTitle();
   $('#err').textContent='';$('#who').value=LS.get('who','');$('#login').hidden=true;$('#pin').hidden=false;scrollTo(0,0)}
-$('#login').onclick=e=>{const b=e.target.closest('[data-z]');if(b)openPin(+b.dataset.z)};
+$('#login').addEventListener('click',e=>{const b=e.target.closest('[data-z]');if(b)openPin(+b.dataset.z)});
 $('#pinBack').onclick=()=>{$('#pin').hidden=true;$('#login').hidden=false;S.zone=null};
-$('#pad').onclick=e=>{const b=e.target.closest('[data-k]');if(!b||S.logging)return;const k=b.dataset.k;if(k==='del')pinBuf=pinBuf.slice(0,-1);else if(pinBuf.length<4)pinBuf+=k;renderPin();if(pinBuf.length===4)tryLogin(pinBuf)};
-async function tryLogin(pin){S.pin=pin;S.who=$('#who').value.trim();LS.set('who',S.who);$('#err').textContent='登入中…';S.logging=true;
+$('#pad').addEventListener('click',e=>{const b=e.target.closest('[data-k]');if(!b||S.logging)return;const k=b.dataset.k;if(k==='del')pinBuf=pinBuf.slice(0,-1);else if(pinBuf.length<4)pinBuf+=k;renderPin();if(pinBuf.length===4)tryLogin(pinBuf)});
+async function tryLogin(pin){S.pin=pin;S.who=$('#who').value.trim();LS.set('who',S.who);$('#err').textContent=t('loggingIn');S.logging=true;
   try{const j=await call({op:'list'});LS.set('sess',{z:S.zone.id,p:pin,who:S.who});S.logging=false;enter(j)}
-  catch(e){S.logging=false;$('#err').textContent=e.message;pinBuf='';renderPin();const d=$('#dots');d.classList.remove('shake');void d.offsetWidth;d.classList.add('shake')}}
-function enter(j){S.hist=LS.get('hist'+S.zone.id,[]);$('#login').hidden=true;$('#pin').hidden=true;$('#app').hidden=false;if(j)apply(j);else render();renderUndoB();startPoll()}
-$('#logout').onclick=()=>{const n=Object.keys(S.pend).length;if(n&&!confirm('還有 '+n+' 筆還沒上傳完成，確定登出？'))return;if(!n&&!confirm('確定登出？'))return;LS.del('sess');S.pend={};LS.del('pend');LS.del('hist'+S.zone.id);location.reload()};
+  catch(e){S.logging=false;$('#err').textContent=tErr(e.message);pinBuf='';renderPin();const d=$('#dots');d.classList.remove('shake');void d.offsetWidth;d.classList.add('shake')}}
+function enter(j){S.hist=(LS.get('hist'+S.zone.id,[])||[]).filter(h=>h&&h.prev);$('#login').hidden=true;$('#pin').hidden=true;$('#app').hidden=false;if(j)apply(j);else render();renderHistB();startPoll()}
+$('#logout').onclick=()=>{const n=Object.keys(S.pend).length;if(!confirm(n?t('logoutPend',{n}):t('logoutQ')))return;LS.del('sess');S.pend={};LS.del('pend');LS.del('hist'+S.zone.id);location.reload()};
 
 /* ===== 資料 ===== */
 function apply(j){S.rows=j.rows||[];S.v=j.v||S.v;if(j.event)$('#evName').textContent=j.event;LS.set('cache'+S.zone.id,{rows:S.rows,v:S.v,at:Date.now()});render()}
@@ -317,87 +404,105 @@ const payOf=r=>S.pend[r.no]||r.pay||'';
 const paid=r=>payOf(r)==='已收款';
 const dueSum=a=>a.reduce((s,r)=>s+(Number(r.due)||0),0);
 const pct=(a,b)=>b?Math.round(a/b*100):0;
+const byNo=no=>S.rows.find(x=>x.no===no);
 function base(){return isAdmin()&&S.zf?S.rows.filter(r=>r.z===S.zf):S.rows}
 function visible(){const q=S.q.trim().toLowerCase();let a=base().slice();
-  if(q){const qn=q.replace(/^#/,'');a=a.filter(r=>(/^\d+$/.test(qn)&&(String(r.n)===qn||String(r.t)===qn))||[r.name,r.ig,r.reg,r.t!=null?r.t+'桌':''].join(' ').toLowerCase().includes(q))}
+  if(q){const qn=q.replace(/^#/,'');a=a.filter(r=>(/^\d+$/.test(qn)&&(String(r.n)===qn||String(r.t)===qn))||[r.name,r.ig,r.reg].join(' ').toLowerCase().includes(q))}
   if(S.f==='todo')a=a.filter(r=>!paid(r));else if(S.f==='done')a=a.filter(r=>paid(r));
   if(S.sort==='table')a.sort((x,y)=>((x.t==null?999:x.t)-(y.t==null?999:y.t))||x.z-y.z||x.n-y.n);else a.sort((x,y)=>x.z-y.z||x.n-y.n);
   return a}
+function igHtml(ig,cls){if(!ig)return '';const u=igUrl(ig);return u?'<a class="'+cls+'" href="'+esc(u)+'" target="_blank" rel="noopener noreferrer">'+esc(ig)+'</a>':'<div class="'+cls+'">'+esc(ig)+'</div>'}
 function render(){if(!S.zone)return;const adm=isAdmin();
-  $('#zTitle').textContent=adm?'管理者':S.zone.name;
+  $('#zTitle').textContent=zname(S.zone.id);
   $('#tabs').hidden=!adm;document.querySelectorAll('#tabs button').forEach(b=>b.classList.toggle('on',b.dataset.tab===S.tab));
   const showList=!adm||S.tab==='list';$('#bar').hidden=!showList;
   const B=base(),done=B.filter(paid).length;
-  $('#sum').innerHTML=showList?'<div class="t"><b>'+done+'</b><span>/ '+B.length+' 人已收款</span><em>'+pct(done,B.length)+'%</em></div><div class="prog"><i style="width:'+pct(done,B.length)+'%"></i></div>':'';
+  $('#sum').innerHTML=showList?'<div class="t"><b>'+done+'</b><span>'+esc(t('sum',{n:B.length}))+'</span><em>'+pct(done,B.length)+'%</em></div><div class="prog"><i style="width:'+pct(done,B.length)+'%"></i></div>':'';
   if(!showList){renderStats();renderSync();return}
-  $('#seg').innerHTML=[['todo','未收款',B.length-done],['done','已收款',done],['all','全部',B.length]].map(([k,l,n])=>'<button data-f="'+k+'" class="'+(S.f===k?'on':'')+'">'+l+'<small>'+n+'</small></button>').join('');
-  $('#zf').hidden=!adm;if(adm)$('#zf').innerHTML='<button data-zf="0" class="'+(S.zf===0?'on':'')+'">全部</button>'+ZONES.map(z=>'<button data-zf="'+z.id+'" class="c'+z.id+(S.zf===z.id?' on':'')+'"><i></i>'+esc(SHORT[z.id])+'</button>').join('');
-  $('#sortb').textContent=S.sort==='table'?'依桌號':'依編號';
+  $('#seg').innerHTML=[['todo',t('fTodo'),B.length-done],['done',t('fDone'),done],['all',t('fAll'),B.length]].map(([k,l,n])=>'<button data-f="'+k+'" class="'+(S.f===k?'on':'')+'">'+esc(l)+'<small>'+n+'</small></button>').join('');
+  $('#zf').hidden=!adm;if(adm)$('#zf').innerHTML='<button data-zf="0" class="'+(S.zf===0?'on':'')+'">'+esc(t('all'))+'</button>'+[1,2,3,4,5].map(id=>'<button data-zf="'+id+'" class="c'+id+(S.zf===id?' on':'')+'"><i></i>'+esc(ZS[LANG][id])+'</button>').join('');
+  $('#sortb').textContent=S.sort==='table'?t('sortT'):t('sortN');
   const a=visible(),regUn={},regAll={};S.rows.forEach(r=>{if(!r.reg)return;regAll[r.reg]=(regAll[r.reg]||0)+1;if(!paid(r))regUn[r.reg]=(regUn[r.reg]||0)+1});
-  $('#list').innerHTML=a.length?'<div class="lst">'+a.map(r=>{const p=payOf(r),c=S.conf===r.no;
-      const cls=c?'conf':p==='已收款'?'ok':p==='未收款'?'':'none',lbl=c?'再點一次<br>改回未收':p==='已收款'?'已收款':p||'未設定';
-      const g=r.reg&&regAll[r.reg]>1&&regUn[r.reg]?'<button class="grp" data-all="'+esc(r.reg)+'">整筆 '+regAll[r.reg]+' 人</button>':'';
-      const tb=r.t!=null?'<span class="tb"><b>'+r.t+'</b><small>桌</small></span>':'<span class="tb na"><b>待排</b></span>';
-      return '<div class="row c'+r.z+'"><span class="no">'+r.n+(adm?'<i class="zd" title="'+r.z+' 區"></i>':'')+'</span><div class="nm"><div class="n1"><span class="f">'+flag(r.c)+'</span>'+esc(r.name)+(S.pend[r.no]?'<span class="pend" title="上傳中"></span>':'')+'</div>'+(r.ig?'<div class="ig">'+esc(r.ig)+'</div>':'')+g+'</div>'+tb+'<button class="pb '+cls+'" data-no="'+esc(r.no)+'">'+lbl+'</button></div>'}).join('')+'</div>'
-    :'<div class="empty">'+(S.q?'<b>找不到結果</b>沒有符合「'+esc(S.q)+'」的人':S.f==='todo'?'<b>全部收完了</b>這個篩選裡沒有未收款的人':'<b>沒有資料</b>')+'</div>';
+  const cf=S.conf;
+  $('#list').innerHTML=a.length?'<div class="lh"><span class="c-no">'+esc(t('colNo'))+'</span><span class="c-nm">'+esc(t('colName'))+'</span><span class="c-t">'+esc(t('colT'))+'</span><span class="c-p">'+esc(t('colPay'))+'</span></div><div class="lst">'+a.map(r=>{const p=payOf(r),c=cf&&cf.no===r.no;
+      const cls=c?(cf.to==='已收款'?'cfp':'cfu'):p==='已收款'?'ok':p==='未收款'?'':'none',lbl=c?(cf.to==='已收款'?t('confirmPay'):t('confirmUnpay')):payTxt(p);
+      const g=r.reg&&regAll[r.reg]>1&&regUn[r.reg]?'<button class="grp" data-all="'+esc(r.reg)+'">'+esc(t('group',{n:regAll[r.reg]}))+'</button>':'';
+      const tb=r.t!=null?'<span class="tb"><b>'+r.t+'</b></span>':'<span class="tb na"><b>'+esc(t('tbd'))+'</b></span>';
+      return '<div class="row c'+r.z+(c?' arm':'')+'"><span class="no">'+r.n+(adm?'<i class="zd"></i>':'')+'</span><div class="nm"><div class="n1"><span class="f">'+flag(r.c)+'</span>'+esc(r.name)+(S.pend[r.no]?'<span class="pend"></span>':'')+'</div>'+igHtml(r.ig,'ig')+g+'</div>'+tb+'<button class="pb '+cls+'" data-no="'+esc(r.no)+'">'+esc(lbl)+'</button></div>'}).join('')+'</div>'
+    :'<div class="empty">'+(S.q?'<b>'+esc(t('emptyQ'))+'</b>'+esc(t('emptyQ2',{q:S.q})):S.f==='todo'?'<b>'+esc(t('emptyTodo'))+'</b>'+esc(t('emptyTodo2')):'<b>'+esc(t('emptyNone'))+'</b>')+'</div>';
   renderSync()}
 
 /* ===== 管理者統計 ===== */
 function renderStats(){const R=S.rows,P=R.filter(paid),U=R.filter(r=>!paid(r)),f=n=>Number(n).toLocaleString('en-US');
-  const k1='<div class="h3" style="margin-top:20px">總覽 · '+R.length+' 人</div><div class="bento"><div class="tile wide"><b>'+pct(P.length,R.length)+'%</b><div class="prog"><i style="width:'+pct(P.length,R.length)+'%"></i></div></div>'+
-    '<div class="tile g"><small>已收款</small><b>'+P.length+'</b></div><div class="tile r"><small>未收款</small><b>'+U.length+'</b></div><div class="tile"><small>總人數</small><b>'+R.length+'</b></div>'+
-    '<div class="tile m g"><small>已收金額</small><b>'+f(dueSum(P))+'</b></div><div class="tile m r"><small>待收金額</small><b>'+f(dueSum(U))+'</b></div><div class="tile m"><small>應收總額</small><b>'+f(dueSum(R))+'</b></div></div>';
-  const zt='<div class="h3">各區</div><div class="card">'+ZONES.map(z=>{const a=R.filter(r=>r.z===z.id),p=a.filter(paid);return '<div class="zrow c'+z.id+'"><div class="a"><span class="zi">'+z.id+'</span><span class="zn">'+esc(z.name)+'</span><b>'+p.length+' / '+a.length+'</b></div><div class="prog"><i style="width:'+pct(p.length,a.length)+'%"></i></div><div class="s"><span>'+pct(p.length,a.length)+'%</span> · 未收 <span>'+(a.length-p.length)+'</span> 人 · 待收 <span>'+f(dueSum(a.filter(r=>!paid(r))))+'</span></div></div>'}).join('')+'</div>';
-  const byM={};R.forEach(r=>{const k=r.paym||'（未填）';(byM[k]=byM[k]||{a:0,p:0,da:0,dp:0}).a++;byM[k].da+=Number(r.due)||0;if(paid(r)){byM[k].p++;byM[k].dp+=Number(r.due)||0}});
-  const mt='<div class="h3">付款方式</div><div class="card tblw"><table><tr><th>方式</th><th>人數</th><th>已收</th><th>未收</th><th>待收金額</th></tr>'+Object.entries(byM).map(([k,v])=>'<tr><td>'+esc(k)+'</td><td>'+v.a+'</td><td class="g">'+v.p+'</td><td class="r">'+(v.a-v.p)+'</td><td>'+f(v.da-v.dp)+'</td></tr>').join('')+'</table></div>';
+  const k1='<div class="h3" style="margin-top:20px">'+esc(t('ovAll',{n:R.length}))+'</div><div class="bento"><div class="tile wide"><b>'+pct(P.length,R.length)+'%</b><div class="prog"><i style="width:'+pct(P.length,R.length)+'%"></i></div></div>'+
+    '<div class="tile g"><small>'+t('kPaid')+'</small><b>'+P.length+'</b></div><div class="tile r"><small>'+t('kUnpaid')+'</small><b>'+U.length+'</b></div><div class="tile"><small>'+t('kTotal')+'</small><b>'+R.length+'</b></div>'+
+    '<div class="tile m g"><small>'+t('kPaidAmt')+'</small><b>'+f(dueSum(P))+'</b></div><div class="tile m r"><small>'+t('kDueAmt')+'</small><b>'+f(dueSum(U))+'</b></div><div class="tile m"><small>'+t('kAllAmt')+'</small><b>'+f(dueSum(R))+'</b></div></div>';
+  const zt='<div class="h3">'+t('zones')+'</div><div class="card">'+[1,2,3,4,5].map(id=>{const a=R.filter(r=>r.z===id),p=a.filter(paid);return '<div class="zrow c'+id+'"><div class="a"><span class="zi">'+id+'</span><span class="zn">'+esc(zname(id))+'</span><b>'+p.length+' / '+a.length+'</b></div><div class="prog"><i style="width:'+pct(p.length,a.length)+'%"></i></div><div class="s">'+esc(t('zs',{p:pct(p.length,a.length),u:a.length-p.length,d:f(dueSum(a.filter(r=>!paid(r))))}))+'</div></div>'}).join('')+'</div>';
+  const th=h=>'<tr>'+h.map(x=>'<th>'+esc(x)+'</th>').join('')+'</tr>';
+  const byM={};R.forEach(r=>{const k=r.paym||t('noPm');(byM[k]=byM[k]||{a:0,p:0,da:0,dp:0}).a++;byM[k].da+=Number(r.due)||0;if(paid(r)){byM[k].p++;byM[k].dp+=Number(r.due)||0}});
+  const mt='<div class="h3">'+t('pm')+'</div><div class="card tblw"><table>'+th(t('pmh'))+Object.entries(byM).map(([k,v])=>'<tr><td>'+esc(k)+'</td><td>'+v.a+'</td><td class="g">'+v.p+'</td><td class="r">'+(v.a-v.p)+'</td><td>'+f(v.da-v.dp)+'</td></tr>').join('')+'</table></div>';
   const byC={};R.forEach(r=>{const k=r.c||'?';(byC[k]=byC[k]||{a:0,p:0}).a++;if(paid(r))byC[k].p++});
-  const ct='<div class="h3">國家／地區</div><div class="card tblw"><table><tr><th>國家</th><th>人數</th><th>已收</th><th>未收</th></tr>'+Object.entries(byC).sort((x,y)=>y[1].a-x[1].a).map(([k,v])=>'<tr><td>'+flag(k)+' '+esc(CN[k]||k)+'</td><td>'+v.a+'</td><td class="g">'+v.p+'</td><td class="r">'+(v.a-v.p)+'</td></tr>').join('')+'</table></div>';
+  const ct='<div class="h3">'+t('ct')+'</div><div class="card tblw"><table>'+th(t('cth'))+Object.entries(byC).sort((x,y)=>y[1].a-x[1].a).map(([k,v])=>'<tr><td>'+flag(k)+' '+esc(cname(k))+'</td><td>'+v.a+'</td><td class="g">'+v.p+'</td><td class="r">'+(v.a-v.p)+'</td></tr>').join('')+'</table></div>';
   const who={};R.filter(r=>r.by&&r.ts).forEach(r=>{const k=r.by.replace(/^收款（|）$/g,'');(who[k]=who[k]||{n:0,d:0}).n++;if(paid(r))who[k].d+=Number(r.due)||0});
-  const wt=Object.keys(who).length?'<div class="h3">收款人</div><div class="card tblw"><table><tr><th>區域・收款人</th><th>處理人數</th><th>收到金額</th></tr>'+Object.entries(who).sort((x,y)=>y[1].n-x[1].n).map(([k,v])=>'<tr><td>'+esc(k)+'</td><td>'+v.n+'</td><td>'+f(v.d)+'</td></tr>').join('')+'</table></div>':'';
+  const wt=Object.keys(who).length?'<div class="h3">'+t('coll')+'</div><div class="card tblw"><table>'+th(t('collh'))+Object.entries(who).sort((x,y)=>y[1].n-x[1].n).map(([k,v])=>'<tr><td>'+esc(k)+'</td><td>'+v.n+'</td><td>'+f(v.d)+'</td></tr>').join('')+'</table></div>':'';
   const recent=R.filter(r=>r.ts).sort((x,y)=>y.ts-x.ts).slice(0,25);
-  const ft='<div class="h3">最近更新</div><div class="card">'+(recent.length?'<ul class="feed">'+recent.map(r=>'<li><time>'+esc(r.at)+'</time><span>'+esc(r.name)+' <b class="'+(paid(r)?'g':'r')+'">'+esc(payOf(r))+'</b><small>'+r.z+' 區 #'+r.n+(r.by?' · '+esc(r.by.replace(/^收款（|）$/g,'')):'')+'</small></span></li>').join('')+'</ul>':'<div class="muted">還沒有人在現場改過款項狀態</div>')+'</div>';
+  const ft='<div class="h3">'+t('recent')+'</div><div class="card">'+(recent.length?'<ul class="feed">'+recent.map(r=>'<li><time>'+esc(r.at)+'</time><span>'+esc(r.name)+' <b class="'+(paid(r)?'g':'r')+'">'+esc(payTxt(payOf(r)))+'</b><small>'+esc(t('zoneN',{z:r.z}))+' #'+r.n+(r.by?' · '+esc(r.by.replace(/^收款（|）$/g,'')):'')+'</small></span></li>').join('')+'</ul>':'<div class="muted">'+t('noRecent')+'</div>')+'</div>';
   $('#list').innerHTML=k1+zt+mt+ct+wt+ft}
-function renderSync(){const n=Object.keys(S.pend).length,e=$('#sync');e.className='sync'+(S.off?' off':n||S.busy?' busy':'');e.querySelector('span').textContent=S.off?('離線'+(n?' · '+n+' 筆待上傳':'')):n?n+' 筆上傳中':'已同步'}
+function renderSync(){const n=Object.keys(S.pend).length,e=$('#sync');e.className='sync'+(S.off?' off':n||S.busy?' busy':'');e.querySelector('span').textContent=S.off?(n?t('offlineN',{n}):t('offline')):n?t('uploading',{n}):t('synced')}
 
-/* ===== 點選 ===== */
-function setPay(nos,pay,label,noHist){const prev={};nos.forEach(no=>{const r=S.rows.find(x=>x.no===no);if(r)prev[no]=payOf(r)==='已收款'?'已收款':'未收款'});
+/* ===== 點選：每一個改動都要按兩下（先變成「確認」再送出） ===== */
+const ARM_MS=4000,MIN_GAP=350;
+function arm(no,to){S.conf={no,to,at:Date.now()};render();clearTimeout(S.confT);S.confT=setTimeout(()=>{if(S.conf&&S.conf.no===no){S.conf=null;render()}},ARM_MS)}
+function disarm(){if(S.conf){S.conf=null;clearTimeout(S.confT);render()}}
+function setPay(nos,pay,lab,noHist){const prev={};nos.forEach(no=>{const r=byNo(no);if(r)prev[no]=payOf(r)==='已收款'?'已收款':'未收款'});
   const ch=nos.filter(no=>prev[no]&&prev[no]!==pay);if(!ch.length)return;
-  if(!noHist){S.hist.push({label:label||'',prev:Object.fromEntries(ch.map(n=>[n,prev[n]]))});if(S.hist.length>40)S.hist.shift();LS.set('hist'+S.zone.id,S.hist);showUndo(label)}
+  if(!noHist){S.hist.push(Object.assign({to:pay,at:Date.now(),prev:Object.fromEntries(ch.map(n=>[n,prev[n]]))},lab));if(S.hist.length>60)S.hist.shift();LS.set('hist'+S.zone.id,S.hist);showUndo();renderHistB()}
   ch.forEach(no=>{S.pend[no]=pay});LS.set('pend',{z:S.zone.id,p:S.pend});S.conf=null;render();try{navigator.vibrate&&navigator.vibrate(10)}catch(e){}flushSoon()}
-$('#list').addEventListener('click',e=>{const b=e.target.closest('.pb');if(b){const no=b.dataset.no,r=S.rows.find(x=>x.no===no);if(!r)return;const p=payOf(r);
-    if(p==='已收款'){if(S.conf===no)setPay([no],'未收款',r.name+' 改回未收款');else{S.conf=no;render();clearTimeout(S.confT);S.confT=setTimeout(()=>{if(S.conf===no){S.conf=null;render()}},3000)}}
-    else setPay([no],'已收款',r.name+' 已收款');return}
-  const a=e.target.closest('[data-all]');if(a)openGroup(a.dataset.all)});
+function hLabel(h){if(!h)return '';if(h.k==='grp')return t('lGrp',{reg:h.reg,n:Object.keys(h.prev).length});if(h.k==='one')return t(h.to==='已收款'?'lPay':'lUnpay',{name:h.name});return h.label||''}
+$('#list').addEventListener('click',e=>{const b=e.target.closest('.pb');
+  if(b){const no=b.dataset.no,r=byNo(no);if(!r)return;const to=paid(r)?'未收款':'已收款';
+    if(S.conf&&S.conf.no===no&&S.conf.to===to){if(Date.now()-S.conf.at<MIN_GAP)return; // 太快的連點不算確認
+      setPay([no],to,{k:'one',name:r.name})}else arm(no,to);return}
+  const a=e.target.closest('[data-all]');if(a){disarm();openGroup(a.dataset.all);return}
+  if(!e.target.closest('a'))disarm()});
 /* 整筆：先列出整筆名單，核對後才送出 */
-function openGroup(reg){const mem=S.rows.filter(r=>r.reg===reg).sort((x,y)=>(x.role==='本人'?0:1)-(y.role==='本人'?0:1)||x.n-y.n);
-  S.grp={reg,sel:new Set(mem.filter(r=>!paid(r)).map(r=>r.no))};
-  $('#shT').textContent=reg+' · 整筆 '+mem.length+' 人';
-  $('#shL').innerHTML=mem.map(r=>{const ok=paid(r);return '<button class="it'+(ok?' dis':' on')+'" data-no="'+esc(r.no)+'"><span class="ck"></span><div class="nm"><div class="n1"><span class="f">'+flag(r.c)+'</span>'+esc(r.name)+'</div>'+(r.ig?'<div class="ig">'+esc(r.ig)+'</div>':'')+'</div>'+(ok?'<span class="paid">已收款</span>':Number(r.due)?'<span class="amt">'+money(r.due)+'</span>':'')+(r.t!=null?'<span class="tb"><b>'+r.t+'</b><small>桌</small></span>':'<span class="tb na"><b>待排</b></span>')+'</button>'}).join('');
+function openGroup(reg,keep){const mem=S.rows.filter(r=>r.reg===reg).sort((x,y)=>(x.role==='本人'?0:1)-(y.role==='本人'?0:1)||x.n-y.n);
+  if(!keep)S.grp={reg,sel:new Set(mem.filter(r=>!paid(r)).map(r=>r.no))};
+  $('#shT').textContent=t('grpTitle',{reg,n:mem.length});$('#shP').textContent=t('grpHint');$('#shF').hidden=false;$('#shGo').hidden=false;$('#shX').textContent=t('cancel');
+  $('#shL').innerHTML=mem.map(r=>{const ok=paid(r);return '<button class="it'+(ok?' dis':' on')+'" data-no="'+esc(r.no)+'"><span class="ck"></span><span class="ino">'+r.n+'</span><div class="nm"><div class="n1"><span class="f">'+flag(r.c)+'</span>'+esc(r.name)+'</div>'+(r.ig?'<div class="ig">'+esc(r.ig)+'</div>':'')+'</div>'+(ok?'<span class="paid">'+esc(t('paid'))+'</span>':Number(r.due)?'<span class="amt">'+money(r.due)+'</span>':'')+(r.t!=null?'<span class="tb"><b>'+r.t+'</b></span>':'<span class="tb na"><b>'+esc(t('tbd'))+'</b></span>')+'</button>'}).join('');
   updGroup();$('#mask').hidden=false;document.body.style.overflow='hidden'}
-function updGroup(){const sel=[...S.grp.sel],n=sel.length,amt=dueSum(S.rows.filter(r=>S.grp.sel.has(r.no))),g=$('#shGo');
+function updGroup(){const n=S.grp.sel.size,amt=dueSum(S.rows.filter(r=>S.grp.sel.has(r.no))),g=$('#shGo');
   document.querySelectorAll('#shL .it:not(.dis)').forEach(i=>i.classList.toggle('on',S.grp.sel.has(i.dataset.no)));
-  $('#shTot').innerHTML=amt?'<span>本次應收</span><b>'+money(amt)+'</b>':'';
-  g.disabled=!n;g.textContent=n?'確認 '+n+' 人已收款':'請勾選要收款的人'}
-function closeGroup(){$('#mask').hidden=true;document.body.style.overflow='';S.grp=null}
-$('#shL').addEventListener('click',e=>{const i=e.target.closest('.it');if(!i||i.classList.contains('dis'))return;const no=i.dataset.no;S.grp.sel.has(no)?S.grp.sel.delete(no):S.grp.sel.add(no);updGroup()});
-$('#shX').onclick=closeGroup;
-$('#mask').addEventListener('click',e=>{if(e.target.id==='mask')closeGroup()});
-$('#shGo').onclick=()=>{if(!S.grp)return;const nos=[...S.grp.sel],reg=S.grp.reg;if(!nos.length)return;closeGroup();setPay(nos,'已收款',reg+' 整筆 '+nos.length+' 人已收款')};
-/* 復原 */
-function showUndo(label){$('#undoT').textContent=label;const u=$('#undo');u.hidden=true;void u.offsetWidth;u.hidden=false;clearTimeout(showUndo.t);showUndo.t=setTimeout(()=>u.hidden=true,7000);renderUndoB()}
-function renderUndoB(){$('#undoB').hidden=!S.hist.length}
-function undo(){const h=S.hist.pop();if(!h){toast('沒有可以復原的操作');return}LS.set('hist'+S.zone.id,S.hist);$('#undo').hidden=true;
-  const byPay={};Object.entries(h.prev).forEach(([no,p])=>(byPay[p]=byPay[p]||[]).push(no));
-  Object.entries(byPay).forEach(([p,nos])=>setPay(nos,p,'',true));renderUndoB();toast('已復原 · '+h.label)}
-$('#undoGo').onclick=undo;
-$('#undoB').onclick=()=>{const h=S.hist[S.hist.length-1];if(!h)return;if(confirm('復原上一步？\n\n'+h.label))undo()};
-$('#seg').onclick=e=>{const b=e.target.closest('[data-f]');if(!b)return;S.f=b.dataset.f;LS.set('f',S.f);render();scrollTo(0,0)};
+  $('#shTot').innerHTML=amt?'<span>'+esc(t('thisDue'))+'</span><b>'+money(amt)+'</b>':'';$('#shTot').hidden=false;
+  g.disabled=!n;g.textContent=n?t('grpGo',{n}):t('grpPick')}
+function closeSheet(){$('#mask').hidden=true;document.body.style.overflow='';S.grp=null;S.histOpen=false}
+$('#shL').addEventListener('click',e=>{const u=e.target.closest('[data-undo]');if(u){undoAt(+u.dataset.undo);return}
+  if(!S.grp)return;const i=e.target.closest('.it');if(!i||i.classList.contains('dis'))return;const no=i.dataset.no;S.grp.sel.has(no)?S.grp.sel.delete(no):S.grp.sel.add(no);updGroup()});
+$('#shX').onclick=closeSheet;
+$('#mask').addEventListener('click',e=>{if(e.target.id==='mask')closeSheet()});
+$('#shGo').onclick=()=>{if(!S.grp)return;const nos=[...S.grp.sel],reg=S.grp.reg;if(!nos.length)return;closeSheet();setPay(nos,'已收款',{k:'grp',reg})};
+/* 復原：底部提示＝復原最新一筆；「紀錄」可以挑任何一筆單獨復原 */
+function showUndo(){const h=S.hist[S.hist.length-1];$('#undoT').textContent=hLabel(h);const u=$('#undo');u.hidden=true;void u.offsetWidth;u.hidden=false;clearTimeout(showUndo.t);showUndo.t=setTimeout(()=>u.hidden=true,7000)}
+function renderHistB(){const n=S.hist.length,b=$('#histB');b.hidden=!n;b.textContent=t('histN',{n})}
+function undoAt(i){const h=S.hist[i];if(!h)return;S.hist.splice(i,1);LS.set('hist'+S.zone.id,S.hist);$('#undo').hidden=true;
+  // 只復原「現在狀態仍是這筆操作改成的樣子」的人，避免蓋掉之後別的改動
+  const back={};let skip=0;Object.entries(h.prev).forEach(([no,p])=>{const r=byNo(no);if(!r)return;if(payOf(r)!==h.to){skip++;return}(back[p]=back[p]||[]).push(no)});
+  Object.entries(back).forEach(([p,nos])=>setPay(nos,p,null,true));renderHistB();toast(t('undone',{l:hLabel(h)})+(skip?' · '+t('histChanged',{n:skip}):''));if(S.histOpen)openHist()}
+function openHist(){S.histOpen=true;S.grp=null;$('#shT').textContent=t('histTitle');$('#shP').textContent=t('histHint');$('#shTot').hidden=true;$('#shGo').hidden=true;$('#shX').textContent=t('histClose');
+  const H=S.hist.map((h,i)=>[h,i]).reverse();const tm=ms=>{const d=new Date(ms);return String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0')};
+  $('#shL').innerHTML=H.length?H.map(([h,i])=>'<div class="hi"><time>'+(h.at?tm(h.at):'')+'</time><span class="hl">'+esc(hLabel(h))+'</span><button class="hu" data-undo="'+i+'">'+esc(t('undo'))+'</button></div>').join(''):'<div class="muted" style="padding:18px 0">'+esc(t('histEmpty'))+'</div>';
+  $('#mask').hidden=false;document.body.style.overflow='hidden'}
+$('#undoGo').onclick=()=>undoAt(S.hist.length-1);
+$('#histB').onclick=()=>{disarm();openHist()};
+$('#seg').onclick=e=>{const b=e.target.closest('[data-f]');if(!b)return;S.f=b.dataset.f;S.conf=null;LS.set('f',S.f);render();scrollTo(0,0)};
 $('#zf').onclick=e=>{const b=e.target.closest('[data-zf]');if(!b)return;S.zf=+b.dataset.zf;render();scrollTo(0,0)};
 $('#tabs').onclick=e=>{const b=e.target.closest('[data-tab]');if(!b)return;S.tab=b.dataset.tab;LS.set('tab',S.tab);render();scrollTo(0,0)};
 $('#sortb').onclick=()=>{S.sort=S.sort==='table'?'n':'table';LS.set('sort',S.sort);render()};
-$('#q').addEventListener('input',e=>{S.q=e.target.value;$('#qx').hidden=!S.q;render()});
+$('#q').addEventListener('input',e=>{S.q=e.target.value;$('#qx').hidden=!S.q;S.conf=null;render()});
 $('#qx').onclick=()=>{S.q='';$('#q').value='';$('#qx').hidden=true;render();$('#q').focus()};
 addEventListener('scroll',()=>{const b=$('#bar');if(b)b.classList.toggle('sh',b.getBoundingClientRect().top<=0&&scrollY>0)},{passive:true});
+// 防止縮放：雙擊交給 CSS touch-action，雙指縮放在 iOS 另外擋
+document.addEventListener('gesturestart',e=>e.preventDefault());
 /* ===== 上傳與同步 ===== */
 let flushT=null,backoff=1000;
 function flushSoon(ms){clearTimeout(flushT);flushT=setTimeout(flush,ms==null?300:ms)}
@@ -413,7 +518,7 @@ async function flush(){const ops=Object.entries(S.pend).map(([no,pay])=>({no,pay
       Object.keys(S.pend).forEach(no=>{const r=by[no];if(!r){delete S.pend[no];return}if((r.pay||'')===S.pend[no])delete S.pend[no]});
       LS.set('pend',{z:S.zone.id,p:S.pend});apply(j)}
     S.wseq=(S.wseq||0)+1;if(Object.keys(S.pend).length)flushSoon(0)}
-  catch(e){S.busy=false;if(e.server&&!/其他人正在儲存/.test(e.message)){toast(e.message);if(/密碼/.test(e.message)){LS.del('sess');setTimeout(()=>location.reload(),1500)}}S.off=!e.server;if(/其他人正在儲存/.test(e.message))S.off=false;renderSync();backoff=Math.min(backoff*2,20000);flushSoon(backoff)}}
+  catch(e){S.busy=false;if(e.server&&!/其他人正在儲存/.test(e.message)){toast(tErr(e.message));if(/密碼/.test(e.message)){LS.del('sess');setTimeout(()=>location.reload(),1500)}}S.off=!e.server;if(/其他人正在儲存/.test(e.message))S.off=false;renderSync();backoff=Math.min(backoff*2,20000);flushSoon(backoff)}}
 let pollT=null;
 function startPoll(){clearInterval(pollT);pollT=setInterval(poll,POLL);setTimeout(poll,300)}
 async function poll(){if(S.busy||document.hidden)return;if(Object.keys(S.pend).length){flush();return}
@@ -427,15 +532,15 @@ function demoApi(b){if(!DB){const names=['Alice Chen','Ben Wu','Cindy Lin','Davi
     for(let z=1;z<=5;z++)for(let i=0;i<8;i++){const sz=1+(i%3);const reg='TP'+String(z*100+i).padStart(3,'0');const pd=i%3===0;for(let j=0;j<sz;j++){DB.push({z,no:'D'+(n++),name:i===2&&j===0?'Christopher Alexander Montgomery-Wellington':names[(i*3+j+z)%names.length],ig:i===1?'@a_very_long_instagram_handle_'+z+j+'_official':'@demo_'+z+i+j,c:cs[z-1],reg,role:j?'攜伴':'本人',party:String(sz),t:z*5+i,pay:pd?'已收款':'未收款',due:j?'':String(1200*sz),paym:pd?'線上付款':'現場付款',id:String(n),at:'',ts:0,by:''})}}
     for(let z=1;z<=5;z++){const a=DB.filter(r=>r.z===z).sort((x,y)=>{const k=s=>[/^[a-z0-9]/i.test(s)?0:1,s.toLowerCase()];const p=k(x.name),q=k(y.name);return p[0]-q[0]||(p[1]<q[1]?-1:p[1]>q[1]?1:0)});a.forEach((r,i)=>r.n=i+1)}}
   return new Promise((ok,no)=>setTimeout(()=>{const want=b.z===0?'0714':String(b.z).repeat(4);if(String(b.p)!==want)return no(Object.assign(new Error('密碼不正確（示範：區號重複 4 次，管理者 0714）'),{server:true}));
-    if(b.op==='set')b.ops.forEach(o=>{const r=DB.find(x=>x.no===o.no);if(r&&(b.z===0||r.z===b.z)){r.pay=o.pay;const d=new Date();r.at=String(d.getMonth()+1).padStart(2,'0')+'/'+String(d.getDate()).padStart(2,'0')+' '+d.toTimeString().slice(0,5);r.ts=d.getTime();r.by='收款（'+(b.z?zname(b.z):'管理者')+(b.who?'・'+b.who:'')+'）'}});
+    if(b.op==='set')b.ops.forEach(o=>{const r=DB.find(x=>x.no===o.no);if(r&&(b.z===0||r.z===b.z)){r.pay=o.pay;const d=new Date();r.at=String(d.getMonth()+1).padStart(2,'0')+'/'+String(d.getDate()).padStart(2,'0')+' '+d.toTimeString().slice(0,5);r.ts=d.getTime();r.by='收款（'+ZN.zh[b.z]+(b.who?'・'+b.who:'')+'）'}});
     if(b.op==='set')return ok({ok:true,part:true,v:++DBV,rows:b.ops.map(o=>DB.find(x=>x.no===o.no)).filter(r=>r&&(b.z===0||r.z===b.z)).map(r=>({no:r.no,pay:r.pay,at:r.at,ts:r.ts,by:r.by}))});
-    ok({ok:true,v:DBV,event:'示範晚宴',zone:b.z===0?ADMIN:ZONES[b.z-1],rows:JSON.parse(JSON.stringify(b.z===0?DB:DB.filter(r=>r.z===b.z)))})},b.op==='set'?900:200))}
+    ok({ok:true,v:DBV,event:'示範晚宴',rows:JSON.parse(JSON.stringify(b.z===0?DB:DB.filter(r=>r.z===b.z)))})},b.op==='set'?900:200))}
 /* ===== 啟動：記得上次登入就直接進去（先顯示手機上暫存的資料，再背景更新） ===== */
-(function boot(){if(DEMO)$('#demoBar').hidden=false;renderZones();
-  const s=LS.get('sess',null);if(!s)return;S.zone=s.z===0?ADMIN:ZONES.find(z=>z.id===s.z);if(!S.zone)return;S.pin=s.p;S.who=s.who||'';
+(function boot(){if(DEMO)$('#demoBar').hidden=false;applyLang();
+  const s=LS.get('sess',null);if(!s)return;if(!(s.z>=0&&s.z<=5))return;S.zone={id:s.z};S.pin=s.p;S.who=s.who||'';
   const pd=LS.get('pend',null);if(pd&&pd.z===S.zone.id)S.pend=pd.p||{};
   const c=LS.get('cache'+S.zone.id,null);if(c){S.rows=c.rows;S.v=c.v}
-  enter(null);call({op:'list'}).then(j=>{if(!Object.keys(S.pend).length)apply(j);else{S.rows=j.rows;render();flushSoon(0)}}).catch(e=>{if(e.server){toast(e.message);LS.del('sess');setTimeout(()=>location.reload(),1500)}else{S.off=true;renderSync()}})})();
+  enter(null);call({op:'list'}).then(j=>{if(!Object.keys(S.pend).length)apply(j);else{S.rows=j.rows;render();flushSoon(0)}}).catch(e=>{if(e.server){toast(tErr(e.message));LS.del('sess');setTimeout(()=>location.reload(),1500)}else{S.off=true;renderSync()}})})();
 </script>
 </body>
 </html>
